@@ -1,0 +1,57 @@
+.calendario-relogio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.area-calendario {
+  display: flex;
+  justify-content: center;
+}
+
+.relogio-card {
+  min-width: 220px;
+  padding: 30px 20px;
+  text-align: center;
+  border-radius: 20px;
+  background: var(--ion-color-light);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.relogio-icone {
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.relogio-hora {
+  font-size: 38px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.relogio-dia {
+  margin-top: 10px;
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 500;
+}
+
+.relogio-data {
+  margin-top: 5px;
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+@media (max-width: 600px) {
+  .calendario-relogio {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .relogio-card {
+    width: 100%;
+    min-width: 0;
+  }
+}
