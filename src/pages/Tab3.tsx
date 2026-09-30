@@ -1,46 +1,28 @@
 import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonButton,
 } from '@ionic/react';
 
 import { useState } from 'react';
 
-import './Tab3.css';
+type EscalaItem = {
+  dia: string;
+  horario: string;
+  disciplina: string;
+  alunos: string[];
+  faculdade?: string;
+  sala?: string;
+};
 
-const equipe = [
-  'Aline',
-  'Andreia',
-  'Camila',
-  'Cristina',
-  'Débora',
-  'Erick',
-  'Fabiano',
-  'Gabriel',
-  'Karina',
-  'Laiza',
-  'Luciana',
-  'Marcela',
-  'Nathalia',
-  'Paula',
-  'Raissa',
-  'Rodrigo',
-  'Thayrine',
-  'Vanessa',
-  'Wellington',
-];
-
-const escalas = {
+const equipe: Record<string, EscalaItem[]> = {
   Aline: [
     {
       dia: 'Segunda-feira',
@@ -68,24 +50,32 @@ const escalas = {
       horario: '21h–23h',
       disciplina: 'Computação',
       alunos: ['Gyde'],
+      faculdade: 'ICE Novo',
+      sala: '209',
     },
     {
       dia: 'Terça-feira',
       horario: '21h–23h',
       disciplina: 'Linguística 1',
       alunos: ['Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '2045',
     },
     {
       dia: 'Quarta-feira',
       horario: '19h–21h',
       disciplina: 'Tradução',
       alunos: [],
+      faculdade: 'Faculdade de Letras',
+      sala: '2007',
     },
     {
       dia: 'Quinta-feira',
       horario: '19h–21h',
       disciplina: 'PU Espanhol',
       alunos: ['Ana Lua'],
+      faculdade: 'Faculdade de Letras',
+      sala: '2037',
     },
   ],
 
@@ -95,30 +85,40 @@ const escalas = {
       horario: '19h–21h',
       disciplina: 'Introdução aos Estudos Surdos',
       alunos: ['Rosani', 'Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1034A',
     },
     {
       dia: 'Terça-feira',
       horario: '21h–23h',
       disciplina: 'PGA Libras',
       alunos: ['Ketlyn'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
     {
       dia: 'Quarta-feira',
       horario: '21h–23h',
       disciplina: 'Introdução aos Estudos Surdos',
       alunos: ['Rosani', 'Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1034A',
     },
     {
       dia: 'Quinta-feira',
       horario: '19h–21h',
       disciplina: 'PGA Libras',
       alunos: ['Ketlyn'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
     {
       dia: 'Sexta-feira',
       horario: '19h–23h',
       disciplina: 'PU Francês',
       alunos: ['Ana Lua'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
   ],
 
@@ -134,6 +134,8 @@ const escalas = {
       horario: '16h–18h',
       disciplina: 'Laboratório de Química Orgânica',
       alunos: [],
+      faculdade: 'ICE Novo',
+      sala: 'L201',
     },
     {
       dia: 'Quinta-feira',
@@ -146,6 +148,8 @@ const escalas = {
       horario: '19h–21h',
       disciplina: 'Linguística 1',
       alunos: ['Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '2045',
     },
   ],
 
@@ -164,30 +168,40 @@ const escalas = {
       horario: '19h–21h',
       disciplina: 'Introdução aos Estudos Surdos',
       alunos: ['Rosani', 'Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1034A',
     },
     {
       dia: 'Terça-feira',
       horario: '19h–21h',
       disciplina: 'Escrita de Sinais',
       alunos: ['Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
     {
       dia: 'Quarta-feira',
       horario: '21h–23h',
       disciplina: 'Introdução aos Estudos Surdos',
       alunos: ['Rosani', 'Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1034A',
     },
     {
       dia: 'Quinta-feira',
       horario: '19h–21h',
       disciplina: 'PU Espanhol',
       alunos: ['Ana Lua'],
+      faculdade: 'Faculdade de Letras',
+      sala: '2037',
     },
     {
       dia: 'Quinta-feira',
       horario: '21h–23h',
       disciplina: 'Escrita de Sinais',
       alunos: ['Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
   ],
 
@@ -218,6 +232,8 @@ const escalas = {
       horario: '16h–18h',
       disciplina: 'Laboratório de Química Orgânica',
       alunos: [],
+      faculdade: 'ICE Novo',
+      sala: 'L201',
     },
     {
       dia: 'Quinta-feira',
@@ -260,6 +276,8 @@ const escalas = {
       horario: '19h–22h',
       disciplina: 'Química das Soluções',
       alunos: ['Ana Cleia'],
+      faculdade: 'ICE Novo',
+      sala: '302',
     },
     {
       dia: 'Quarta-feira',
@@ -368,24 +386,32 @@ const escalas = {
       horario: '19h–21h',
       disciplina: 'Tradução',
       alunos: [],
+      faculdade: 'Faculdade de Letras',
+      sala: '2007',
     },
     {
       dia: 'Quinta-feira',
       horario: '19h–21h',
       disciplina: 'Linguística 1',
       alunos: ['Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '2045',
     },
     {
       dia: 'Quinta-feira',
       horario: '21h–23h',
       disciplina: 'Escrita de Sinais',
       alunos: ['Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
     {
       dia: 'Sexta-feira',
       horario: '19h–23h',
       disciplina: 'PU Francês',
       alunos: ['Ana Lua'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
   ],
 
@@ -395,30 +421,40 @@ const escalas = {
       horario: '21h–23h',
       disciplina: 'Computação',
       alunos: ['Gyde'],
+      faculdade: 'ICE Novo',
+      sala: '209',
     },
     {
       dia: 'Terça-feira',
       horario: '19h–21h',
       disciplina: 'Escrita de Sinais',
       alunos: ['Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
     {
       dia: 'Terça-feira',
       horario: '21h–23h',
       disciplina: 'PGA Libras',
       alunos: ['Ketlyn'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
     {
       dia: 'Quinta-feira',
       horario: '19h–21h',
       disciplina: 'PGA Libras',
       alunos: ['Ketlyn'],
+      faculdade: 'Faculdade de Letras',
+      sala: '1040',
     },
     {
       dia: 'Quinta-feira',
       horario: '21h–23h',
       disciplina: 'Computação',
       alunos: ['Gyde'],
+      faculdade: 'ICE Novo',
+      sala: '209',
     },
   ],
 
@@ -461,29 +497,37 @@ const escalas = {
       horario: '19h–22h',
       disciplina: 'Química das Soluções',
       alunos: ['Ana Cleia'],
+      faculdade: 'ICE Novo',
+      sala: '302',
     },
     {
       dia: 'Terça-feira',
       horario: '21h–23h',
       disciplina: 'Linguística 1',
       alunos: ['Vera'],
+      faculdade: 'Faculdade de Letras',
+      sala: '2045',
     },
     {
       dia: 'Quinta-feira',
       horario: '21h–23h',
       disciplina: 'Computação',
       alunos: ['Gyde'],
+      faculdade: 'ICE Novo',
+      sala: '209',
     },
   ],
 };
 
 const Tab3: React.FC = () => {
-  const [pessoaSelecionada, setPessoaSelecionada] =
-    useState<string | null>(null);
+  const [aberto, setAberto] = useState<string | null>(null);
+
+  const nomes = Object.keys(equipe).sort((a, b) =>
+    a.localeCompare(b, 'pt-BR')
+  );
 
   return (
     <IonPage>
-
       <IonHeader>
         <IonToolbar>
           <IonTitle>Equipe</IonTitle>
@@ -491,147 +535,108 @@ const Tab3: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen>
+        <div style={{ padding: '16px' }}>
 
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">
-              Equipe
-            </IonTitle>
-          </IonToolbar>
-        </IonHeader>
+          {nomes.map((nome) => {
+            const estaAberto = aberto === nome;
 
-        <IonCard>
+            return (
+              <IonCard key={nome}>
 
-          <IonCardHeader>
-            <IonCardTitle>
-              Equipe TILSP-UFJF
-            </IonCardTitle>
-          </IonCardHeader>
+                <IonCardHeader>
+                  <IonCardTitle>
+                    {nome}
+                  </IonCardTitle>
+                </IonCardHeader>
 
-          <IonCardContent>
+                <IonCardContent>
 
-            <IonList>
+                  <IonButton
+                    fill="outline"
+                    onClick={() =>
+                      setAberto(
+                        estaAberto ? null : nome
+                      )
+                    }
+                  >
+                    {estaAberto
+                      ? 'Fechar'
+                      : 'Ver escala'}
+                  </IonButton>
 
-              {equipe.map((nome) => (
+                  {estaAberto && (
+                    <div style={{ marginTop: '16px' }}>
 
-                <div key={nome}>
+                      {equipe[nome].map(
+                        (item, index) => (
+                          <div
+                            key={index}
+                            style={{
+                              marginBottom: '20px',
+                              paddingBottom: '15px',
+                              borderBottom:
+                                '1px solid var(--ion-color-medium)',
+                            }}
+                          >
 
-                  <IonItem>
+                            <p>
+                              <strong>
+                                📅 {item.dia}
+                              </strong>
+                            </p>
 
-                    <IonLabel>
-                      <h2>{nome}</h2>
-                      <p>Intérprete de Libras</p>
-                    </IonLabel>
+                            <p>
+                              🕐 {item.horario}
+                            </p>
 
-                    <IonButton
-                      slot="end"
-                      fill="outline"
-                      onClick={() =>
-                        setPessoaSelecionada(
-                          pessoaSelecionada === nome
-                            ? null
-                            : nome
+                            <p>
+                              📚 {item.disciplina}
+                            </p>
+
+                            {item.faculdade && (
+                              <>
+                                <p>
+                                  🏛️ {item.faculdade}
+                                </p>
+
+                                <p>
+                                  🚪 Sala {item.sala}
+                                </p>
+                              </>
+                            )}
+
+                            {item.alunos.length > 0 && (
+                              <>
+                                <p>
+                                  <strong>
+                                    🎓 Alunos surdos:
+                                  </strong>
+                                </p>
+
+                                {item.alunos.map(
+                                  (aluno) => (
+                                    <p key={aluno}>
+                                      • {aluno}
+                                    </p>
+                                  )
+                                )}
+                              </>
+                            )}
+
+                          </div>
                         )
-                      }
-                    >
-                      {pessoaSelecionada === nome
-                        ? 'Fechar'
-                        : 'Ver escala'}
-                    </IonButton>
+                      )}
 
-                  </IonItem>
-
-                  {pessoaSelecionada === nome && (
-
-                    <IonCard>
-
-                      <IonCardHeader>
-                        <IonCardTitle>
-                          Escala de {nome}
-                        </IonCardTitle>
-                      </IonCardHeader>
-
-                      <IonCardContent>
-
-                        {escalas[
-                          nome as keyof typeof escalas
-                        ].length === 0 ? (
-
-                          <p>
-                            Nenhuma disciplina cadastrada
-                            para esta pessoa.
-                          </p>
-
-                        ) : (
-
-                          <IonList>
-
-                            {escalas[
-                              nome as keyof typeof escalas
-                            ].map((item, index) => (
-
-                              <IonItem key={index}>
-
-                                <IonLabel>
-
-                                  <h2>
-                                    {item.disciplina}
-                                  </h2>
-
-                                  <p>
-                                    {item.dia}
-                                  </p>
-
-                                  <p>
-                                    🕐 {item.horario}
-                                  </p>
-
-                                  {item.alunos.length > 0 && (
-                                    <>
-                                      <p>
-                                        <strong>
-                                          🎓 Alunos surdos:
-                                        </strong>
-                                      </p>
-
-                                      {item.alunos.map(
-                                        (aluno) => (
-                                          <p key={aluno}>
-                                            • {aluno}
-                                          </p>
-                                        )
-                                      )}
-                                    </>
-                                  )}
-
-                                </IonLabel>
-
-                              </IonItem>
-
-                            ))}
-
-                          </IonList>
-
-                        )}
-
-                      </IonCardContent>
-
-                    </IonCard>
-
+                    </div>
                   )}
 
-                </div>
+                </IonCardContent>
+              </IonCard>
+            );
+          })}
 
-              ))}
-
-            </IonList>
-
-          </IonCardContent>
-
-        </IonCard>
-
+        </div>
       </IonContent>
-
     </IonPage>
   );
 };
